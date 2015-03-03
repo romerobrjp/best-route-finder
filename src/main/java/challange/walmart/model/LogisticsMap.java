@@ -13,10 +13,12 @@ public class LogisticsMap {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	@Column(nullable = false)
-	private String originPoint;
-	@Column(nullable = false)
-	private String destinyPoint;
+	@OneToOne
+	@JoinColumn(name = "origin_point_id", nullable = false)
+	private Point originPoint;
+	@OneToOne
+	@JoinColumn(name = "destiny_point_id", nullable = false)
+	private Point destinyPoint;
 	@Column(nullable = false)
 	private Float distance;
 
@@ -39,19 +41,19 @@ public class LogisticsMap {
 		this.name = name;
 	}
 
-	public String getOriginPoint() {
+	public Point getOriginPoint() {
 		return originPoint;
 	}
 
-	public void setOriginPoint(String originPoint) {
+	public void setOriginPoint(Point originPoint) {
 		this.originPoint = originPoint;
 	}
 
-	public String getDestinyPoint() {
+	public Point getDestinyPoint() {
 		return destinyPoint;
 	}
 
-	public void setDestinyPoint(String destinyPoint) {
+	public void setDestinyPoint(Point destinyPoint) {
 		this.destinyPoint = destinyPoint;
 	}
 
