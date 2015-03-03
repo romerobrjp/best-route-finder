@@ -7,5 +7,5 @@ import org.springframework.data.repository.CrudRepository;
  * Created by Romero Meireles on 28/02/15.
  */
 
-public interface DeliveryRepository extends CrudRepository<LogisticsMap, Long> {
+public interface LogisticsMapRepository extends CrudRepository<LogisticsMap, Long> {
 }
