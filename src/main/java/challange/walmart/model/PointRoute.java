@@ -12,16 +12,15 @@ public class PointRoute {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;
 	@OneToOne
-	@JoinColumn(name = "destiny_point", nullable = false)
-	public Point destinyPoint;
-	@Column(nullable = false)
+	@JoinColumn(name = "destiny_point")
+	public DeliveryPoint destinyDeliveryPoint;
 	public double distance;
 
 	public PointRoute() {
 	}
 
-	public PointRoute(Point destinyPoint, double distance) {
-		this.destinyPoint = destinyPoint;
+	public PointRoute(DeliveryPoint destinyDeliveryPoint, double distance) {
+		this.destinyDeliveryPoint = destinyDeliveryPoint;
 		this.distance = distance;
 	}
 
@@ -33,12 +32,12 @@ public class PointRoute {
 		this.id = id;
 	}
 
-	public Point getDestinyPoint() {
-		return destinyPoint;
+	public DeliveryPoint getDestinyDeliveryPoint() {
+		return destinyDeliveryPoint;
 	}
 
-	public void setDestinyPoint(Point destinyPoint) {
-		this.destinyPoint = destinyPoint;
+	public void setDestinyDeliveryPoint(DeliveryPoint destinyDeliveryPoint) {
+		this.destinyDeliveryPoint = destinyDeliveryPoint;
 	}
 
 	public double getDistance() {

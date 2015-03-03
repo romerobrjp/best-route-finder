@@ -15,10 +15,10 @@ public class LogisticsMap {
 	private String name;
 	@OneToOne
 	@JoinColumn(name = "origin_point_id", nullable = false)
-	private Point originPoint;
+	private DeliveryPoint originDeliveryPoint;
 	@OneToOne
 	@JoinColumn(name = "destiny_point_id", nullable = false)
-	private Point destinyPoint;
+	private DeliveryPoint destinyDeliveryPoint;
 	@Column(nullable = false)
 	private Float distance;
 
@@ -41,20 +41,20 @@ public class LogisticsMap {
 		this.name = name;
 	}
 
-	public Point getOriginPoint() {
-		return originPoint;
+	public DeliveryPoint getOriginDeliveryPoint() {
+		return originDeliveryPoint;
 	}
 
-	public void setOriginPoint(Point originPoint) {
-		this.originPoint = originPoint;
+	public void setOriginDeliveryPoint(DeliveryPoint originDeliveryPoint) {
+		this.originDeliveryPoint = originDeliveryPoint;
 	}
 
-	public Point getDestinyPoint() {
-		return destinyPoint;
+	public DeliveryPoint getDestinyDeliveryPoint() {
+		return destinyDeliveryPoint;
 	}
 
-	public void setDestinyPoint(Point destinyPoint) {
-		this.destinyPoint = destinyPoint;
+	public void setDestinyDeliveryPoint(DeliveryPoint destinyDeliveryPoint) {
+		this.destinyDeliveryPoint = destinyDeliveryPoint;
 	}
 
 	public Float getDistance() {

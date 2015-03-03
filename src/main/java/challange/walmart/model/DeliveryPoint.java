@@ -1,14 +1,15 @@
 package challange.walmart.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Romero Meireles on 02/03/15.
  */
 
-@Entity
-public class Point implements Comparable<Point> {
+@Entity(name = "delivery_point")
+public class DeliveryPoint implements Comparable<DeliveryPoint> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;
@@ -16,17 +17,17 @@ public class Point implements Comparable<Point> {
 	public String name;
 	@OneToMany
 	@JoinColumn(name = "point_route_id")
-	public List<PointRoute> adjacencies;
+	public List<PointRoute> adjacencies = new ArrayList<PointRoute>();
 	@OneToOne
 	@JoinColumn(name = "previous_city")
-	public Point previousPoint;
+	public DeliveryPoint previousDeliveryPoint;
 	@Transient
 	public Double minDistance = Double.POSITIVE_INFINITY;
 
-	public Point() {
+	public DeliveryPoint() {
 	}
 
-	public Point(String name) {
+	public DeliveryPoint(String name) {
 		this.name = name;
 	}
 
@@ -34,7 +35,7 @@ public class Point implements Comparable<Point> {
 		return name;
 	}
 
-	public int compareTo(Point other) {
+	public int compareTo(DeliveryPoint other) {
 		return Double.compare(minDistance, other.minDistance);
 	}
 
@@ -62,12 +63,12 @@ public class Point implements Comparable<Point> {
 		this.adjacencies = adjacencies;
 	}
 
-	public Point getPreviousPoint() {
-		return previousPoint;
+	public DeliveryPoint getPreviousDeliveryPoint() {
+		return previousDeliveryPoint;
 	}
 
-	public void setPreviousPoint(Point previousPoint) {
-		this.previousPoint = previousPoint;
+	public void setPreviousDeliveryPoint(DeliveryPoint previousDeliveryPoint) {
+		this.previousDeliveryPoint = previousDeliveryPoint;
 	}
 
 	public Double getMinDistance() {
