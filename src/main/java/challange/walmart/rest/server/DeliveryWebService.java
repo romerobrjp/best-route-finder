@@ -5,7 +5,7 @@ import challange.walmart.model.DeliveryPoint;
 import challange.walmart.model.PointsPath;
 import challange.walmart.repository.DeliveryPointRepository;
 import challange.walmart.repository.PointsPathRepository;
-import challange.walmart.service.DeliveryService;
+import challange.walmart.service.LogisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +26,7 @@ import java.util.List;
 public class DeliveryWebService implements Serializable {
 
 	@Autowired
-	DeliveryService deliveryService;
+	LogisticsService logisticsService;
 	@Autowired
 	DeliveryPointRepository deliveryPointRepository;
 	@Autowired
@@ -127,7 +127,7 @@ public class DeliveryWebService implements Serializable {
 		DeliveryPoint originPoints = this.deliveryPointRepository.findByName(originPointName);
 		DeliveryPoint destinyPoints = this.deliveryPointRepository.findByName(destinyPointName);
 
-		path = this.deliveryService.calculateBestRoute(originPoints, destinyPoints, autonomy, fuelPrice);
+		path = this.logisticsService.calculateBestRoute(originPoints, destinyPoints, autonomy, fuelPrice);
 
 		return path;
 	}
