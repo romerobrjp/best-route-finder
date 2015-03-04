@@ -1,12 +1,10 @@
 package challange.walmart.rest.server;
 
 import challange.walmart.dto.BestRoutDTO;
-import challange.walmart.model.LogisticsMap;
 import challange.walmart.model.DeliveryPoint;
-import challange.walmart.model.PointRoute;
-import challange.walmart.repository.LogisticsMapRepository;
+import challange.walmart.model.PointsPath;
 import challange.walmart.repository.DeliveryPointRepository;
-import challange.walmart.repository.PointRouteRepository;
+import challange.walmart.repository.PointsPathRepository;
 import challange.walmart.service.DeliveryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.ws.rs.core.MediaType;
 import java.io.Serializable;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by Romero Meireles on 28/02/15.
@@ -28,11 +28,9 @@ public class DeliveryWebService implements Serializable {
 	@Autowired
 	DeliveryService deliveryService;
 	@Autowired
-	LogisticsMapRepository logisticsMapRepository;
-	@Autowired
 	DeliveryPointRepository deliveryPointRepository;
 	@Autowired
-	PointRouteRepository pointRouteRepository;
+	PointsPathRepository pointsPathRepository;
 
     @RequestMapping(
 			consumes = { MediaType.APPLICATION_FORM_URLENCODED },
@@ -41,42 +39,75 @@ public class DeliveryWebService implements Serializable {
             value = "/delivery"
     )
 	@Transactional
-    public LogisticsMap createDeliveryMap(
+    public PointsPath createLogisticsMap(
             @RequestParam(value = "name", required = true) String mapName,
-            @RequestParam(value = "point_a", required = true) String originPointName,
-            @RequestParam(value = "point_b", required = true) String destinyPointName,
+            @RequestParam(value = "origin_point", required = true) String originPointName,
+            @RequestParam(value = "destiny_point", required = true) String destinyPointName,
             @RequestParam(value = "distance", required = true) Float distance
     ) {
-        LogisticsMap logisticsMap = new LogisticsMap();
-		logisticsMap.setName(mapName);
+		DeliveryPoint originPoint = deliveryPointRepository.findByName(originPointName);
+		DeliveryPoint destinyPoint = deliveryPointRepository.findByName(destinyPointName);
+		PointsPath pointsPathOrigin = new PointsPath(mapName);
 
-		DeliveryPoint deliveryPointA = new DeliveryPoint(originPointName);
-		DeliveryPoint deliveryPointB = new DeliveryPoint(destinyPointName);
+		if (destinyPoint == null) {
+			destinyPoint = new DeliveryPoint(destinyPointName);
+		}
+		else {
+			if (originPoint != null) {
+				originPoint.setPreviousDeliveryPoint(destinyPoint);
+			}
+		}
 
-		PointRoute pointRouteA = new PointRoute();
-		PointRoute pointRouteB = new PointRoute();
+		if (originPoint == null) {
+			originPoint = new DeliveryPoint(originPointName);
 
-		deliveryPointA.getAdjacencies().add(pointRouteA);
-		pointRouteA.setDestinyDeliveryPoint(deliveryPointB);
-		pointRouteA.setDistance(distance);
+			pointsPathOrigin.setDistance(distance);
+			pointsPathOrigin.setOriginDeliveryPoint(originPoint);
+			pointsPathOrigin.setDestinyDeliveryPoint(destinyPoint);
 
-		deliveryPointB.getAdjacencies().add(pointRouteB);
-		deliveryPointB.setPreviousDeliveryPoint(deliveryPointA);
+			originPoint.getAdjacencies().add(pointsPathOrigin);
 
-		this.deliveryPointRepository.save(deliveryPointA);
-		this.deliveryPointRepository.save(deliveryPointB);
+			this.pointsPathRepository.save(pointsPathOrigin);
+		}
+		else {
+			if (originPoint.getAdjacencies() != null) {
+				boolean alreadyHasDestinyAdjacency = false;
 
-		this.pointRouteRepository.save(pointRouteA);
-		this.pointRouteRepository.save(pointRouteB);
+				for (Iterator<PointsPath> ppIt  = originPoint.getAdjacencies().iterator(); ppIt.hasNext();) {
+					PointsPath pp = ppIt.next();
+					if (pp.getDestinyDeliveryPoint().getName().equals(destinyPoint)) {
+						alreadyHasDestinyAdjacency = true;
+						break;
+					}
+				}
 
-		logisticsMap.setName(mapName);
-		logisticsMap.setOriginDeliveryPoint(deliveryPointA);
-		logisticsMap.setDestinyDeliveryPoint(deliveryPointB);
-		logisticsMap.setDistance(distance);
+				if (!alreadyHasDestinyAdjacency) {
+					pointsPathOrigin = new PointsPath(mapName);
+					pointsPathOrigin.setDistance(distance);
+					pointsPathOrigin.setOriginDeliveryPoint(originPoint);
+					pointsPathOrigin.setDestinyDeliveryPoint(destinyPoint);
 
-		this.logisticsMapRepository.save(logisticsMap);
+					originPoint.getAdjacencies().add(pointsPathOrigin);
 
-        return logisticsMap;
+					this.pointsPathRepository.save(pointsPathOrigin);
+				}
+			}
+			else {
+				pointsPathOrigin = new PointsPath(mapName);
+				pointsPathOrigin.setDistance(distance);
+				pointsPathOrigin.setOriginDeliveryPoint(originPoint);
+				pointsPathOrigin.setDestinyDeliveryPoint(destinyPoint);
+
+				originPoint.getAdjacencies().add(pointsPathOrigin);
+
+				this.pointsPathRepository.save(pointsPathOrigin);
+			}
+		}
+
+		this.deliveryPointRepository.save(originPoint);
+		this.deliveryPointRepository.save(destinyPoint);
+
+		return pointsPathOrigin;
     }
 
 	@RequestMapping(
@@ -84,19 +115,20 @@ public class DeliveryWebService implements Serializable {
 		produces = MediaType.APPLICATION_JSON,
 		value = "/delivery"
 	)
-	public BestRoutDTO getShortestRouteTo(
+	public List<DeliveryPoint> getShortestRouteTo(
 		@RequestParam(value = "origin_point", required = true) String originPointName,
 		@RequestParam(value = "destiny_point", required = true) String destinyPointName,
 		@RequestParam(value = "autonomy", required = true) Float autonomy,
 		@RequestParam(value = "fuel_price", required = true) Float fuelPrice
 	) {
 		BestRoutDTO bestRout = new BestRoutDTO();
+		List<DeliveryPoint> path = null;
 
-		DeliveryPoint originDeliveryPoint = this.deliveryPointRepository.findByName(originPointName);
-		DeliveryPoint destinyDeliveryPoint = this.deliveryPointRepository.findByName(destinyPointName);
+		DeliveryPoint originPoints = this.deliveryPointRepository.findByName(originPointName);
+		DeliveryPoint destinyPoints = this.deliveryPointRepository.findByName(destinyPointName);
 
-		bestRout = this.deliveryService.calculateBestRoute(originDeliveryPoint, destinyDeliveryPoint, autonomy, fuelPrice);
+		path = this.deliveryService.calculateBestRoute(originPoints, destinyPoints, autonomy, fuelPrice);
 
-		return bestRout;
+		return path;
 	}
 }
