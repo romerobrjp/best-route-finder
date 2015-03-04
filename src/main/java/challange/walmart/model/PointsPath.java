@@ -3,26 +3,42 @@ package challange.walmart.model;
 import javax.persistence.*;
 
 /**
- * Created by Romero Meireles on 28/02/15.
+ * Created by Romero Meireles on 02/03/15.
  */
-
 @Entity
 @Table(name = "logistics_map")
-public class LogisticsMap {
+public class PointsPath {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(nullable = false)
 	private String name;
-	@OneToOne
-	@JoinColumn(name = "origin_point_id", nullable = false)
+	@ManyToOne
+	@JoinColumn(name = "origin_delivery_point")
 	private DeliveryPoint originDeliveryPoint;
 	@OneToOne
-	@JoinColumn(name = "destiny_point_id", nullable = false)
+	@JoinColumn(name = "destiny_delivery_point")
 	private DeliveryPoint destinyDeliveryPoint;
 	@Column(nullable = false)
 	private Float distance;
 
-	public LogisticsMap() {
+	public PointsPath() {
+	}
+
+	public PointsPath(String name) {
+		this.name = name;
+	}
+
+	public PointsPath(String name, DeliveryPoint originDeliveryPoint, DeliveryPoint destinyDeliveryPoint, Float distance) {
+		this.name = name;
+		this.originDeliveryPoint = originDeliveryPoint;
+		this.destinyDeliveryPoint = destinyDeliveryPoint;
+		this.distance = distance;
+	}
+
+	public PointsPath(DeliveryPoint destinyDeliveryPoint, Float distance) {
+		this.destinyDeliveryPoint = destinyDeliveryPoint;
+		this.distance = distance;
 	}
 
 	public Long getId() {
@@ -57,7 +73,7 @@ public class LogisticsMap {
 		this.destinyDeliveryPoint = destinyDeliveryPoint;
 	}
 
-	public Float getDistance() {
+	public double getDistance() {
 		return distance;
 	}
 

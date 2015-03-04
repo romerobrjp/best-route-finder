@@ -12,17 +12,16 @@ import java.util.List;
 public class DeliveryPoint implements Comparable<DeliveryPoint> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long id;
+	private Long id;
 	@Column(nullable = false)
-	public String name;
-	@OneToMany
-	@JoinColumn(name = "point_route_id")
-	public List<PointRoute> adjacencies = new ArrayList<PointRoute>();
+	private String name;
+	@OneToMany(fetch = FetchType.EAGER)
+	private List<PointsPath> adjacencies = new ArrayList<PointsPath>();
 	@OneToOne
-	@JoinColumn(name = "previous_city")
-	public DeliveryPoint previousDeliveryPoint;
+	@JoinTable(name = "previous_point_id")
+	private DeliveryPoint previousDeliveryPoint;
 	@Transient
-	public Double minDistance = Double.POSITIVE_INFINITY;
+	private Double minDistance = Double.POSITIVE_INFINITY;
 
 	public DeliveryPoint() {
 	}
@@ -55,11 +54,11 @@ public class DeliveryPoint implements Comparable<DeliveryPoint> {
 		this.name = name;
 	}
 
-	public List<PointRoute> getAdjacencies() {
+	public List<PointsPath> getAdjacencies() {
 		return adjacencies;
 	}
 
-	public void setAdjacencies(List<PointRoute> adjacencies) {
+	public void setAdjacencies(List<PointsPath> adjacencies) {
 		this.adjacencies = adjacencies;
 	}
 
