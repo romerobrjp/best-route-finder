@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 /**
- * Created by root on 03/03/15.
+ * created by Romero Meireles on 03/03/15.
  */
 public interface DeliveryPointRepository extends CrudRepository<DeliveryPoint, Long> {
 
