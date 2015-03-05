@@ -20,7 +20,7 @@ public class PointsPath {
 	@JoinColumn(name = "destiny_delivery_point")
 	private DeliveryPoint destinyDeliveryPoint;
 	@Column(nullable = false)
-	private Float distance;
+	private Double distance;
 
 	public PointsPath() {
 	}
@@ -29,14 +29,14 @@ public class PointsPath {
 		this.name = name;
 	}
 
-	public PointsPath(String name, DeliveryPoint originDeliveryPoint, DeliveryPoint destinyDeliveryPoint, Float distance) {
+	public PointsPath(String name, DeliveryPoint originDeliveryPoint, DeliveryPoint destinyDeliveryPoint, Double distance) {
 		this.name = name;
 		this.originDeliveryPoint = originDeliveryPoint;
 		this.destinyDeliveryPoint = destinyDeliveryPoint;
 		this.distance = distance;
 	}
 
-	public PointsPath(DeliveryPoint destinyDeliveryPoint, Float distance) {
+	public PointsPath(DeliveryPoint destinyDeliveryPoint, Double distance) {
 		this.destinyDeliveryPoint = destinyDeliveryPoint;
 		this.distance = distance;
 	}
@@ -73,11 +73,11 @@ public class PointsPath {
 		this.destinyDeliveryPoint = destinyDeliveryPoint;
 	}
 
-	public double getDistance() {
+	public Double getDistance() {
 		return distance;
 	}
 
-	public void setDistance(Float distance) {
+	public void setDistance(Double distance) {
 		this.distance = distance;
 	}
 }
