@@ -6,6 +6,7 @@ import challange.walmart.model.PointsPath;
 import challange.walmart.repository.DeliveryPointRepository;
 import challange.walmart.repository.PointsPathRepository;
 import challange.walmart.service.LogisticsService;
+import org.hibernate.annotations.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +44,7 @@ public class DeliveryWebService implements Serializable {
             @RequestParam(value = "name", required = true) String mapName,
             @RequestParam(value = "origin_point", required = true) String originPointName,
             @RequestParam(value = "destiny_point", required = true) String destinyPointName,
-            @RequestParam(value = "distance", required = true) Float distance
+            @RequestParam(value = "distance", required = true) Double distance
     ) {
 		DeliveryPoint originPoint = deliveryPointRepository.findByName(originPointName);
 		DeliveryPoint destinyPoint = deliveryPointRepository.findByName(destinyPointName);
@@ -124,10 +125,10 @@ public class DeliveryWebService implements Serializable {
 		BestRoutDTO bestRout = new BestRoutDTO();
 		List<DeliveryPoint> path = null;
 
-		DeliveryPoint originPoints = this.deliveryPointRepository.findByName(originPointName);
-		DeliveryPoint destinyPoints = this.deliveryPointRepository.findByName(destinyPointName);
+		DeliveryPoint originPoint = this.deliveryPointRepository.findByName(originPointName);
+		DeliveryPoint destinyPoint = this.deliveryPointRepository.findByName(destinyPointName);
 
-		path = this.logisticsService.calculateBestRoute(originPoints, destinyPoints, autonomy, fuelPrice);
+		path = this.logisticsService.calculateBestRoute(originPoint, destinyPoint, autonomy, fuelPrice);
 
 		return path;
 	}
