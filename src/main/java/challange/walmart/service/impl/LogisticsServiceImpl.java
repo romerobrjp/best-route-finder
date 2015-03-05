@@ -1,5 +1,6 @@
 package challange.walmart.service.impl;
 
+import challange.walmart.dto.BestRoutDTO;
 import challange.walmart.internals.djikstra.DjikstraCustom;
 import challange.walmart.model.DeliveryPoint;
 import challange.walmart.model.PointsPath;
@@ -27,15 +28,15 @@ public class LogisticsServiceImpl implements LogisticsService {
 	DjikstraCustom djikstraCustom;
 
 	@Override
-	public List<DeliveryPoint> calculateBestRoute(DeliveryPoint origin, DeliveryPoint destiny, Float autonomy, Float fuelPrice) {
-		List<DeliveryPoint> bestPath = null;
+	public BestRoutDTO calculateBestRoute(DeliveryPoint origin, DeliveryPoint destiny, Double autonomy, Double fuelPrice) {
+		BestRoutDTO bestRoutDTO = new BestRoutDTO();
 
 		djikstraCustom.computePathsFromOrigin(origin);
 		destiny = deliveryPointRepository.findByName(destiny.getName());
-		System.out.println("Distance from " + origin + " to " + destiny + ": " + destiny.getMinDistance());
-		bestPath = djikstraCustom.getShortestPathToDestiny(destiny);
-		System.out.println("Path: " + bestPath);
 
-		return bestPath;
+		bestRoutDTO.setBestPath(djikstraCustom.getShortestPathToDestiny(destiny));
+		bestRoutDTO.setCost(djikstraCustom.calculateCost(destiny.getMinDistance(), fuelPrice, autonomy));
+
+		return bestRoutDTO;
 	}
 }
