@@ -27,23 +27,25 @@
     <!-- SPRING BEANS BASE PACKAGE -->
     <context:component-scan base-package="challange.walmart" />
     <context:annotation-config  />
-    <mvc:annotation-driven />
     <jpa:repositories base-package="challange.walmart.repository" />
 
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="prefix" value="/views/"/>
-        <property name="suffix" value=".jsp"/>
-    </bean>
+    <!-- JACKSON -->
+    <bean id="customJacksonMapper"
+          class="challange.walmart.internals.jackson.CustomJacksonMapper"
+          scope="prototype" />
 
-    <bean
-        id="transactionManager"
-        name="transactionManager"
-        class="org.springframework.orm.jpa.JpaTransactionManager"
-    >
-        <property
-                name="entityManagerFactory"
-                ref="entityManagerFactory"
-        />
-    </bean>
+    <!-- STATIC RESOURCES HANDLER (HTML/CSS/JS/IMGS) -->
+    <mvc:default-servlet-handler />
+    <!-- SCAN FOR SPRING WEB ANNOTATIONS -->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <!-- CUSTOM JSON MAPPER: CONVERTS JDK7 MEDIA TYPES AND PREVENT LAZY INITIALIZATION EXCEPTION -->
+            <bean id="hibernateJsonConverter"
+                  class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper"
+                          ref="customJacksonMapper" />
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
 </beans>
