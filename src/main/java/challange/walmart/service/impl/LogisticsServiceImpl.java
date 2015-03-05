@@ -1,5 +1,6 @@
 package challange.walmart.service.impl;
 
+import challange.walmart.internals.djikstra.DjikstraCustom;
 import challange.walmart.model.DeliveryPoint;
 import challange.walmart.model.PointsPath;
 import challange.walmart.repository.PointsPathRepository;
@@ -22,52 +23,19 @@ public class LogisticsServiceImpl implements LogisticsService {
 	PointsPathRepository pointsPathRepository;
 	@Autowired
 	DeliveryPointRepository deliveryPointRepository;
+	@Autowired
+	DjikstraCustom djikstraCustom;
 
 	@Override
 	public List<DeliveryPoint> calculateBestRoute(DeliveryPoint origin, DeliveryPoint destiny, Float autonomy, Float fuelPrice) {
-		List<DeliveryPoint> bestPath;
+		List<DeliveryPoint> bestPath = null;
 
-		this.computePathsFromOrigin(origin);
+		djikstraCustom.computePathsFromOrigin(origin);
+		destiny = deliveryPointRepository.findByName(destiny.getName());
 		System.out.println("Distance from " + origin + " to " + destiny + ": " + destiny.getMinDistance());
-		bestPath = getShortestPathToDestiny(destiny);
+		bestPath = djikstraCustom.getShortestPathToDestiny(destiny);
 		System.out.println("Path: " + bestPath);
 
 		return bestPath;
-	}
-
-	public static void computePathsFromOrigin(DeliveryPoint originPoint) {
-		originPoint.setMinDistance(0.);
-		PriorityQueue<DeliveryPoint> deliveryPointQueue = new PriorityQueue<DeliveryPoint>();
-		deliveryPointQueue.add(originPoint);
-
-		while (!deliveryPointQueue.isEmpty()) {
-			DeliveryPoint u = deliveryPointQueue.poll();
-
-			// Visit each edge exiting u
-			for (PointsPath pr : u.getAdjacencies())
-			{
-				DeliveryPoint p = pr.getDestinyDeliveryPoint();
-				double distance = pr.getDistance();
-				double distanceThroughU = u.getMinDistance() + distance;
-				if (distanceThroughU < p.getMinDistance()) {
-					deliveryPointQueue.remove(p);
-					p.setMinDistance(distanceThroughU);
-					p.setPreviousDeliveryPoint(u);
-					deliveryPointQueue.add(p);
-				}
-			}
-		}
-	}
-
-	public static List<DeliveryPoint> getShortestPathToDestiny(DeliveryPoint deliveryPointDestiny)
-	{
-		List<DeliveryPoint> path = new ArrayList<DeliveryPoint>();
-
-		for (DeliveryPoint deliveryPoint = deliveryPointDestiny; deliveryPoint != null; deliveryPoint = deliveryPoint.getPreviousDeliveryPoint()) {
-			path.add(deliveryPoint);
-		}
-
-		Collections.reverse(path);
-		return path;
 	}
 }
