@@ -1,5 +1,7 @@
 package challange.walmart.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -15,9 +17,11 @@ public class PointsPath {
 	private String name;
 	@ManyToOne
 	@JoinColumn(name = "origin_delivery_point")
+	@JsonIgnore
 	private DeliveryPoint originDeliveryPoint;
 	@OneToOne
 	@JoinColumn(name = "destiny_delivery_point")
+	@JsonIgnore
 	private DeliveryPoint destinyDeliveryPoint;
 	@Column(nullable = false)
 	private Double distance;
