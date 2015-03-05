@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 /**
- * Created by root on 04/03/15.
+ * created by Romero Meireles on 04/03/15.
  */
 @Component
 @Scope(BeanDefinition.SCOPE_SINGLETON)
@@ -50,8 +50,7 @@ public class DjikstraCustom {
 		}
 	}
 
-	public List<DeliveryPoint> getShortestPathToDestiny(DeliveryPoint deliveryPointDestiny)
-	{
+	public List<DeliveryPoint> getShortestPathToDestiny(DeliveryPoint deliveryPointDestiny) {
 		List<DeliveryPoint> path = new ArrayList<DeliveryPoint>();
 
 		for (DeliveryPoint deliveryPoint = deliveryPointDestiny; deliveryPoint != null; deliveryPoint = deliveryPoint.getPreviousDeliveryPoint()) {
@@ -60,5 +59,9 @@ public class DjikstraCustom {
 
 		Collections.reverse(path);
 		return path;
+	}
+
+	public Double calculateCost(Double distance, Double fuel_price, Double autonomy) {
+		return ((distance / autonomy) * fuel_price);
 	}
 }
