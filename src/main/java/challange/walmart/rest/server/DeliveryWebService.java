@@ -6,18 +6,16 @@ import challange.walmart.model.PointsPath;
 import challange.walmart.repository.DeliveryPointRepository;
 import challange.walmart.repository.PointsPathRepository;
 import challange.walmart.service.LogisticsService;
-import org.hibernate.annotations.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.ws.rs.core.MediaType;
 import java.io.Serializable;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * Created by Romero Meireles on 28/02/15.
@@ -34,9 +32,10 @@ public class DeliveryWebService implements Serializable {
 	PointsPathRepository pointsPathRepository;
 
     @RequestMapping(
-			consumes = { MediaType.APPLICATION_FORM_URLENCODED },
+			consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE },
+			headers = "Content-Type=application/json",
             method = RequestMethod.POST,
-            produces = { MediaType.APPLICATION_JSON },
+            produces = { MediaType.APPLICATION_JSON_VALUE },
             value = "/delivery"
     )
 	@Transactional
@@ -112,24 +111,25 @@ public class DeliveryWebService implements Serializable {
     }
 
 	@RequestMapping(
+		consumes = MediaType.ALL_VALUE,
+		headers = "Content-Type=application/json;charset=UTF-8",
 		method = RequestMethod.GET,
-		produces = MediaType.APPLICATION_JSON,
+		produces = MediaType.APPLICATION_JSON_VALUE,
 		value = "/delivery"
 	)
-	public List<DeliveryPoint> getShortestRouteTo(
+	public BestRoutDTO getShortestRouteTo(
 		@RequestParam(value = "origin_point", required = true) String originPointName,
 		@RequestParam(value = "destiny_point", required = true) String destinyPointName,
-		@RequestParam(value = "autonomy", required = true) Float autonomy,
-		@RequestParam(value = "fuel_price", required = true) Float fuelPrice
+		@RequestParam(value = "autonomy", required = true) Double autonomy,
+		@RequestParam(value = "fuel_price", required = true) Double fuelPrice
 	) {
-		BestRoutDTO bestRout = new BestRoutDTO();
-		List<DeliveryPoint> path = null;
+		BestRoutDTO bestRout;
 
 		DeliveryPoint originPoint = this.deliveryPointRepository.findByName(originPointName);
 		DeliveryPoint destinyPoint = this.deliveryPointRepository.findByName(destinyPointName);
 
-		path = this.logisticsService.calculateBestRoute(originPoint, destinyPoint, autonomy, fuelPrice);
+		bestRout = this.logisticsService.calculateBestRoute(originPoint, destinyPoint, autonomy, fuelPrice);
 
-		return path;
+		return bestRout;
 	}
 }
