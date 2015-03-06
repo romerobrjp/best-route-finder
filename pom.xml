@@ -63,6 +63,17 @@
                 </configuration>
             </plugin>
 
+            <!-- WAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <failOnMissingWebXml>true</failOnMissingWebXml>
+                    <warName>${project-context}</warName>
+                </configuration>
+            </plugin>
+
             <!-- JETTY PLUGIN -->
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
@@ -74,17 +85,6 @@
                     </httpConnector>
                 </configuration>
             </plugin>
-
-            <!-- WAR -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.4</version>
-                <configuration>
-                    <failOnMissingWebXml>true</failOnMissingWebXml>
-                    <warName>${project-context}</warName>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 
@@ -94,11 +94,11 @@
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
-            <!-- SET SCOPE TO "provided" IF SERVER ALREADY EMBED IT -->
+            <!-- set scope to "provided" if server already embed it -->
             <scope>compile</scope>
         </dependency>
 
-        <!-- DATABASE (DISABLE REMOVING 'database-context.xml' IN WEB.XML) -->
+        <!-- DATABASE (disable it by removing 'database-context.xml' in web.xml) -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-dbcp2</artifactId>
@@ -117,14 +117,7 @@
             <version>4.3.6.Final</version>
         </dependency>
 
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-            <version>4.12</version>
-        </dependency>
-
-        <!-- SPRING CONTEXT -->
+        <!-- SPRING -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -146,6 +139,12 @@
             <version>4.1.5.RELEASE</version>
         </dependency>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>4.1.5.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
             <version>1.7.2.RELEASE</version>
@@ -163,5 +162,48 @@
             <version>2.5.1</version>
         </dependency>
 
+        <!-- TESTS -->
+        <!--We use Hamcrest matchers when we are writing
+            assertions for the responses-->
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>1.3</version>
+        </dependency>
+        <!--junit without hamcrest-core-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+            <version>4.12</version>
+            <!--We need to exclude the hamcrest-core dependency
+                because we already added the hamcrest-all dependency-->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.hamcrest</groupId>
+                    <artifactId>hamcrest-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- We use Mockito as our mocking library -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>1.10.19</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- We use JsonPath when we are writing assertions
+            for JSON documents returned by our REST API -->
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path-assert</artifactId>
+            <version>1.2.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>
