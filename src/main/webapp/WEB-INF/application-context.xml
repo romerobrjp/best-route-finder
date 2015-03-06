@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans
-        xmlns="http://www.springframework.org/schema/beans"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:aop="http://www.springframework.org/schema/aop"
-        xmlns:c="http://www.springframework.org/schema/c"
-        xmlns:cache="http://www.springframework.org/schema/cache"
-        xmlns:context="http://www.springframework.org/schema/context"
-        xmlns:jee="http://www.springframework.org/schema/jee"
-        xmlns:lang="http://www.springframework.org/schema/lang"
-        xmlns:p="http://www.springframework.org/schema/p"
-        xmlns:task="http://www.springframework.org/schema/task"
-        xmlns:util="http://www.springframework.org/schema/util"
-        xmlns:mvc="http://www.springframework.org/schema/mvc"
-        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
-        xsi:schemaLocation="http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.0.xsd
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.0.xsd
 		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
@@ -22,30 +22,45 @@
 		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.0.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd"
-        >
+	>
 
-    <!-- SPRING BEANS BASE PACKAGE -->
-    <context:component-scan base-package="challange.walmart" />
-    <context:annotation-config  />
-    <jpa:repositories base-package="challange.walmart.repository" />
+	<!-- SPRING BEANS BASE PACKAGE -->
+	<context:component-scan base-package="challange.walmart" />
+	<context:annotation-config  />
 
-    <!-- JACKSON -->
-    <bean id="customJacksonMapper"
-          class="challange.walmart.internals.jackson.CustomJacksonMapper"
-          scope="prototype" />
+	<jpa:repositories base-package="challange.walmart.repository" />
 
-    <!-- STATIC RESOURCES HANDLER (HTML/CSS/JS/IMGS) -->
-    <mvc:default-servlet-handler />
-    <!-- SCAN FOR SPRING WEB ANNOTATIONS -->
-    <mvc:annotation-driven>
-        <mvc:message-converters>
-            <!-- CUSTOM JSON MAPPER: CONVERTS JDK7 MEDIA TYPES AND PREVENT LAZY INITIALIZATION EXCEPTION -->
-            <bean id="hibernateJsonConverter"
-                  class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-                <property name="objectMapper"
-                          ref="customJacksonMapper" />
-            </bean>
-        </mvc:message-converters>
-    </mvc:annotation-driven>
 
+	<!-- JACKSON -->
+	<bean id="customJacksonMapper"
+		  class="challange.walmart.internals.jackson.CustomJacksonMapper"
+		  scope="prototype" />
+
+	<!-- STATIC RESOURCES HANDLER (HTML/CSS/JS/IMGS) -->
+	<mvc:default-servlet-handler />
+	<!-- SCAN FOR SPRING WEB ANNOTATIONS -->
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<!-- CUSTOM JSON MAPPER: CONVERTS JDK7 MEDIA TYPES AND PREVENT LAZY INITIALIZATION EXCEPTION -->
+			<bean
+				id="hibernateJsonConverter"
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property ref="customJacksonMapper"
+						  name="objectMapper" />
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<bean
+		id="documentationController"
+		class="org.jsondoc.springmvc.controller.JSONDocController">
+		<constructor-arg name="version" value="1.0" />
+		<constructor-arg name="basePath" value="http://localhost:8080/api" />
+		<constructor-arg name="packages">
+			<list>
+				<value>challange.walmart.rest.server</value> <!-- packages in which you have your spring controllers -->
+				<value>challange.walmart.model</value> <!-- packages in which you have your objects -->
+			</list>
+		</constructor-arg>
+	</bean>
 </beans>
