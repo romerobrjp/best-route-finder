@@ -102,6 +102,7 @@ public class LogisticsServiceImpl implements LogisticsService {
 
 		bestRoutDTO.setBestPath(djikstraCustom.getShortestPathToDestiny(destiny));
 		bestRoutDTO.setCost(djikstraCustom.calculateCost(destiny.getMinDistance(), fuelPrice, autonomy));
+		bestRoutDTO.setDistance(destiny.getMinDistance());
 
 		return bestRoutDTO;
 	}
