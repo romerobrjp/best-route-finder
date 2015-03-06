@@ -92,7 +92,7 @@
 				<version>1.1.12</version>
 				<configuration>
 					<version>1.1</version>
-					<basePath>http://localhost:8080/api</basePath>
+					<basePath>http://localhost:8080/</basePath>
 					<packages>
 						<package>challange.walmart.rest.server</package>
 						<package>challange.walmart.model</package>
