@@ -1,5 +1,8 @@
 package challange.walmart.model;
 
+import org.jsondoc.core.annotation.ApiObject;
+import org.jsondoc.core.annotation.ApiObjectField;
+
 import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,18 +12,24 @@ import java.util.List;
  */
 
 @Entity(name = "delivery_point")
+@ApiObject(name = "DeliveryPoint", description = "Represents a point of a path")
 public class DeliveryPoint implements Comparable<DeliveryPoint> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@ApiObjectField(name = "id")
 	private Long id;
 	@Column(nullable = false)
+	@ApiObjectField(name = "name", description = "Represents the name of the point", required = true)
 	private String name;
 	@OneToMany(fetch = FetchType.EAGER)
+	@ApiObjectField(name = "adjacencies", description = "Represents the adjacent paths that a point has", required = true)
 	private List<DeliveryPath> adjacencies = new LinkedList<DeliveryPath>();
 	@OneToOne
 	@JoinTable(name = "previous_point_id")
+	//@ApiObjectField(name = "previous_point", description = "Indicates the previous point of the current point")
 	private DeliveryPoint previousDeliveryPoint;
 	@Column(name = "min_distance")
+	@ApiObjectField(name = "name", description = "Represents the minimum distance between the current point and hist next")
 	private Double minDistance = Double.POSITIVE_INFINITY;
 
 	public DeliveryPoint() {

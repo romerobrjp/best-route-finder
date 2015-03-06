@@ -1,6 +1,8 @@
 package challange.walmart.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.jsondoc.core.annotation.ApiObject;
+import org.jsondoc.core.annotation.ApiObjectField;
 
 import javax.persistence.*;
 
@@ -9,21 +11,26 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "logistics_map")
+@ApiObject(name = "LogisticsMap", description = "Represents a logistics map")
 public class DeliveryPath {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@ApiObjectField(name = "id")
 	@Column(nullable = false)
 	private String name;
 	@ManyToOne
 	@JoinColumn(name = "origin_delivery_point")
 	@JsonIgnore
+	@ApiObjectField(name = "originDeliveryPoint", description = "Indicates the origin point in logistics the map", required = true)
 	private DeliveryPoint originDeliveryPoint;
 	@OneToOne
 	@JoinColumn(name = "destiny_delivery_point")
 	@JsonIgnore
+	@ApiObjectField(name = "originDeliveryPoint", description = "Indicates the destiny point in the logistics map", required = true)
 	private DeliveryPoint destinyDeliveryPoint;
 	@Column(nullable = false)
+	@ApiObjectField(name = "distance", description = "Indicates, in kilometers, the distance between two points in the logistics map", required = true)
 	private Double distance;
 
 	public DeliveryPath() {
