@@ -1,1 +1,1 @@
-java -jar jetty-runner.jar walmart-logistics.war
+web:    java $JAVA_OPTS -jar target/dependency/jetty-runner.jar --port $PORT target/walmart-logistics.war
