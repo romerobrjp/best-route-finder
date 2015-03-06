@@ -1,7 +1,7 @@
 package challange.walmart.internals.djikstra;
 
 import challange.walmart.model.DeliveryPoint;
-import challange.walmart.model.PointsPath;
+import challange.walmart.model.DeliveryPath;
 import challange.walmart.repository.DeliveryPointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -33,7 +33,7 @@ public class DjikstraCustom {
 			DeliveryPoint polledPoint = deliveryPointQueue.poll();
 
 			// Visit each Path exiting polledPoint
-			for (PointsPath polledPointPath : polledPoint.getAdjacencies()) {
+			for (DeliveryPath polledPointPath : polledPoint.getAdjacencies()) {
 				DeliveryPoint polledPointPathDestiny = polledPointPath.getDestinyDeliveryPoint();
 				Double distanceThroughU = polledPoint.getMinDistance() + polledPointPath.getDistance();
 

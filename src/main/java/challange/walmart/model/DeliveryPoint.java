@@ -1,7 +1,6 @@
 package challange.walmart.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class DeliveryPoint implements Comparable<DeliveryPoint> {
 	@Column(nullable = false)
 	private String name;
 	@OneToMany(fetch = FetchType.EAGER)
-	private List<PointsPath> adjacencies = new LinkedList<PointsPath>();
+	private List<DeliveryPath> adjacencies = new LinkedList<DeliveryPath>();
 	@OneToOne
 	@JoinTable(name = "previous_point_id")
 	private DeliveryPoint previousDeliveryPoint;
@@ -55,11 +54,11 @@ public class DeliveryPoint implements Comparable<DeliveryPoint> {
 		this.name = name;
 	}
 
-	public List<PointsPath> getAdjacencies() {
+	public List<DeliveryPath> getAdjacencies() {
 		return adjacencies;
 	}
 
-	public void setAdjacencies(List<PointsPath> adjacencies) {
+	public void setAdjacencies(List<DeliveryPath> adjacencies) {
 		this.adjacencies = adjacencies;
 	}
 

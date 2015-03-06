@@ -9,7 +9,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "logistics_map")
-public class PointsPath {
+public class DeliveryPath {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -26,21 +26,21 @@ public class PointsPath {
 	@Column(nullable = false)
 	private Double distance;
 
-	public PointsPath() {
+	public DeliveryPath() {
 	}
 
-	public PointsPath(String name) {
+	public DeliveryPath(String name) {
 		this.name = name;
 	}
 
-	public PointsPath(String name, DeliveryPoint originDeliveryPoint, DeliveryPoint destinyDeliveryPoint, Double distance) {
+	public DeliveryPath(String name, DeliveryPoint originDeliveryPoint, DeliveryPoint destinyDeliveryPoint, Double distance) {
 		this.name = name;
 		this.originDeliveryPoint = originDeliveryPoint;
 		this.destinyDeliveryPoint = destinyDeliveryPoint;
 		this.distance = distance;
 	}
 
-	public PointsPath(DeliveryPoint destinyDeliveryPoint, Double distance) {
+	public DeliveryPath(DeliveryPoint destinyDeliveryPoint, Double distance) {
 		this.destinyDeliveryPoint = destinyDeliveryPoint;
 		this.distance = distance;
 	}
