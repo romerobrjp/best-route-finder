@@ -1,7 +1,6 @@
 package challange.walmart.dto;
 
 import challange.walmart.model.DeliveryPoint;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -10,10 +9,9 @@ import java.util.List;
  * Created by Romero Meireles on 02/03/15.
  */
 public class BestRoutDTO  {
-	@JsonProperty("bestPath")
 	private List<DeliveryPoint> bestPath = new LinkedList<DeliveryPoint>();
-	@JsonProperty("cost")
 	private Double cost;
+	private Double distance;
 
 	public BestRoutDTO() {
 	}
@@ -32,5 +30,29 @@ public class BestRoutDTO  {
 
 	public void setCost(Double cost) {
 		this.cost = cost;
+	}
+
+	public Double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(Double distance) {
+		this.distance = distance;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder();
+		result.append(" >>> Path for best route: ");
+
+		for (DeliveryPoint point : this.bestPath) {
+			result.append(point.getName() + " > ");
+		}
+
+		result.append("\n >>> Total distance: " + this.distance);
+
+		result.append("\n >>> Cost: " + this.cost);
+
+		return result.toString();
 	}
 }
