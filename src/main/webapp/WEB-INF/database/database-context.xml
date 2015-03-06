@@ -31,7 +31,9 @@
 
 	<context:property-placeholder
 		file-encoding="UTF-8"
-		location="classpath:/WEB-INF/database/database.properties,classpath:/WEB-INF/database/hibernate-config.properties,classpath:/WEB-INF/database/eclipselink-config.properties" />
+		location="classpath:/WEB-INF/database/database.properties,
+            classpath:/WEB-INF/database/hibernate-config.properties,
+            classpath:/WEB-INF/database/eclipselink-config.properties" />
 
 	<!-- SETS DATASOURCE: HOLDS ALL DATABASE CONFIGURATIONS -->
 	<bean
