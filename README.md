@@ -43,9 +43,12 @@ Apesar de trabalhar diariamente com tecnologias como JSF, EJB, Glassfish, Jersey
 
 
 ### Como executar a aplicação:
-- Faça o checkout do respositótio Git através da url https://github.com/romeromfm/walmart-logistics.git
-- Vá até a pasta do projeto e execute o comando do plugin Jetty para maven "mvn jetty:run"
-- Acesse a url localhost:8080/jsondoc-ui.html para acessar a documentação da API REST
-- É possível realizar as requisições aos recursos REST a partir da página citada no tópioc anterior, mas você também pode utilizar o cliente REST que preferir
+- Antes de tudo é necessário que ter instalado e configurado as seguintes ferramentas: git, uma conta no GitHub, Maven 3m JDK 7.
+- Utilizando sua IDE favorita ou através de linha de comando, faça um clone do respositótio Git através da url https://github.com/romeromfm/walmart-logistics.git
+- Após baixar o projeto, o Maven baixar e instalar as dependências e plugins para o projeto
+- Vamos agora iniciar nosso servidor de aplicações. Vá até a pasta do projeto e execute o comando do plugin Jetty para maven "mvn jetty:run", ou se preferir pela sua IDE. Não é necessário baixar o Jetty, o plugin do Maven se encarrega de tudo sozinho.
+- Com o servidor rodando, acesse a url localhost:8080/jsondoc-ui.html para acessar a documentação da API REST
+- É possível realizar as requisições aos recursos REST a partir da página citada no tópico anterior, mas você também pode utilizar o cliente REST que preferir
 - Primeiramente será necessário popular o banco dados, para isso, utilize o recurso /delivery com o método POST
 - Após popular o banco, você poderá realizar pesquisas para encontrar as melhores rota através do recurso /delivery com o método GET
+- Para realizar interação com os serviços REST basta seguir as orientações da documentação citada anteriormente.
