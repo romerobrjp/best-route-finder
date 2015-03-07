@@ -10,12 +10,12 @@ Para popular sua base de dados o sistema precisa expor um *Webservices* que acei
 O formato de malha logística é bastante simples, cada linha mostra uma rota: ponto de origem, ponto de destino e 
 distância entre os pontos em quilômetros.
 
--A B 10 
--B D 15
--A C 20
--C D 30
--B E 50
--D E 30
+- A B 10 
+- B D 15
+- A C 20
+- C D 30
+- B E 50
+- D E 30
 
 Com os mapas carregados o requisitante irá procurar o menor valor de entrega e seu caminho, para isso 
 ele passará o *nome do ponto de origem, nome do ponto de destino, autonomia do caminhão (km/l) e o valor do litro 
