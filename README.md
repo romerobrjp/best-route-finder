@@ -39,16 +39,17 @@ Um exemplo de entrada seria, origem A, destino D, autonomia 10, valor do litro 2
 - jQuery
 
 ### Motivação
-Apesar de trabalhar diariamente com tecnologias como JSF, EJB, Glassfish, Jersey REST API, escolhi trabalhar as utilizadas neste projeto devido à  simplicidade e "light weight" para construir e executar uma aplicação web. Apesar de nunca ter desenvolvido aplicações com Spring Web nem Jetty, esta escolha me permitiu nova aquisição de conhecimentos extremamente importantes onde as pessoas buscam cada vez menos reinventar a roda e utilizar-se de tecnologias cada vez mais inteligentes e simples ao mesmo tempo, refletindo assim na produtividade do desenvolvimento.
+Apesar de trabalhar diariamente com tecnologias como JSF, EJB, Glassfish, Jersey REST API, escolhi trabalhar com as utilizadas neste projeto devido à  simplicidade e "light weight" para construir e executar uma aplicação web. Apesar de nunca ter desenvolvido aplicações com Spring Web nem Jetty, esta escolha me permitiu nova aquisição de conhecimentos extremamente importantes onde as pessoas buscam cada vez menos reinventar a roda e utilizar-se de tecnologias cada vez mais inteligentes e simples ao mesmo tempo, refletindo assim na produtividade do desenvolvimento.
 
 
 ### Como executar a aplicação:
-- Antes de tudo é necessário que ter instalado e configurado as seguintes ferramentas: git, uma conta no GitHub, Maven 3m JDK 7.
+- Antes de tudo é necessário que ter instalado e configurado as seguintes ferramentas: git, uma conta no GitHub, Maven 3, JDK 7.
 - Utilizando sua IDE favorita ou através de linha de comando, faça um clone do respositótio Git através da url https://github.com/romeromfm/walmart-logistics.git
-- Após baixar o projeto, mande o Maven baixar e instalar as dependências e plugins para o projeto
+- [Opcional] Após baixar o projeto, dentro da pasta, execute "mvn compile" para compilar as classes e baixar as dependências necessárias
+- [Opcional] Para executar os testes execute "mvn test"
 - Se necessário, modifique a versão do java que será usado na compilação através no parâmetro ${java-version} no pom.xml
 - Instale o PorstreSQL (se não tiver ainda) e crie uma banco chamado "walmart-logistics"
-- Vamos agora iniciar nosso servidor de aplicações. Vá até a pasta do projeto e execute o comando do plugin Jetty para maven "mvn jetty:run", ou se preferir pela sua IDE. Não é necessário baixar o Jetty, o plugin do Maven se encarrega de tudo sozinho.
+- Vamos agora iniciar nosso servidor de aplicações. Vá até a pasta do projeto e execute o comando do plugin Jetty para maven "mvn jetty:run" o qual irá baixar dependências necessárias, compilar o projeto e executar os testes, ou se preferir pela sua IDE. Não é necessário baixar o Jetty, o plugin do Maven se encarrega de tudo sozinho.
 - Com o servidor rodando, acesse a url localhost:8080/jsondoc-ui.html para acessar a documentação da API REST
 - É possível realizar as requisições aos recursos REST a partir da página citada no tópico anterior, mas você também pode utilizar o cliente REST que preferir
 - Primeiramente será necessário popular o banco dados, para isso, utilize o recurso /delivery com o método POST
