@@ -45,7 +45,9 @@ Apesar de trabalhar diariamente com tecnologias como JSF, EJB, Glassfish, Jersey
 ### Como executar a aplicação:
 - Antes de tudo é necessário que ter instalado e configurado as seguintes ferramentas: git, uma conta no GitHub, Maven 3m JDK 7.
 - Utilizando sua IDE favorita ou através de linha de comando, faça um clone do respositótio Git através da url https://github.com/romeromfm/walmart-logistics.git
-- Após baixar o projeto, o Maven baixar e instalar as dependências e plugins para o projeto
+- Após baixar o projeto, mande o Maven baixar e instalar as dependências e plugins para o projeto
+- Se necessário, modifique a versão do java que será usado na compilação através no parâmetro ${java-version} no pom.xml
+- Instale o PorstreSQL (se não tiver ainda) e crie uma banco chamado "walmart-logistics"
 - Vamos agora iniciar nosso servidor de aplicações. Vá até a pasta do projeto e execute o comando do plugin Jetty para maven "mvn jetty:run", ou se preferir pela sua IDE. Não é necessário baixar o Jetty, o plugin do Maven se encarrega de tudo sozinho.
 - Com o servidor rodando, acesse a url localhost:8080/jsondoc-ui.html para acessar a documentação da API REST
 - É possível realizar as requisições aos recursos REST a partir da página citada no tópico anterior, mas você também pode utilizar o cliente REST que preferir
