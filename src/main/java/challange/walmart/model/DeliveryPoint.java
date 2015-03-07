@@ -21,7 +21,7 @@ public class DeliveryPoint implements Comparable<DeliveryPoint> {
 	@Column(nullable = false)
 	@ApiObjectField(name = "name", description = "Represents the name of the point", required = true)
 	private String name;
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	@ApiObjectField(name = "adjacencies", description = "Represents the adjacent paths that a point has", required = true)
 	private List<DeliveryPath> adjacencies = new LinkedList<DeliveryPath>();
 	@OneToOne
