@@ -51,7 +51,7 @@ Apesar de trabalhar diariamente com tecnologias como JSF, EJB, Glassfish, Jersey
 - Por padrão a banco utilizado é o H2 (embarcado), portanto não é necessária nenheum configuração
 - [Opcional] Instale o PorstreSQL (se não tiver ainda) e crie uma banco chamado "walmart-logistics". Lembre-se de fazer as mudanças necessárias ao PostgreSQl no database.properties e também mudar o dialeto no arquivo hibernate-config.properties
 - Vamos agora iniciar o servidor de aplicações. Vá até a pasta do projeto e execute o comando do plugin Jetty para maven "mvn jetty:run" o qual irá baixar dependências necessárias, compilar o projeto e executar os testes, ou se preferir pela sua IDE. Não é necessário baixar o Jetty, o plugin do Maven se encarrega de tudo sozinho.
-- Com o servidor rodando, acesse a url localhost:8080/jsondoc-ui.html para acessar a documentação da API REST
+- Com o servidor rodando, acesse a url localhost:8080 para acessar a documentação da API REST
 - É possível realizar as requisições aos recursos REST a partir da página citada no tópico anterior, mas você também pode utilizar o cliente REST que preferir
 - Primeiramente será necessário popular o banco dados, para isso, utilize o recurso /delivery com o método POST
 - Voce visualizar o banco de dados através de um cliente H2. Para isso baixe, extraia o .zip e execute o arquivo .jar que se encontra na pasta /h2/bin. Se preferir um cliente diferente, no link a seguir, na seção "Database Frontends / ToolsDatabase Frontends / Tools" estão listados diversos aplicativos suportados pela H2: http://h2database.com/html/links.html#tools

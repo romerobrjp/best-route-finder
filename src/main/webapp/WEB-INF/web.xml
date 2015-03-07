@@ -9,7 +9,7 @@
     <display-name>walmart-logistics</display-name>
 
     <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
+        <welcome-file>jsondoc-ui.html</welcome-file>
     </welcome-file-list>
 
     <!-- SPRING WEB DISPATCHER SERVLET -->
