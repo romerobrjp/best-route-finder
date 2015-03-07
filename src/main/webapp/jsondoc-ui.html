@@ -122,7 +122,7 @@ table td {
     		</div>
     		<form class="navbar-form navbar-left col-md-8" role="search">
 				<div class="form-group">
-		        	<input id="jsondocfetch" type="text" class="form-control" style="width:350px" placeholder="Insert here the JSONDoc URL" value="${jsondoc.path}" autocomplete="off">
+		        	<input id="jsondocfetch" type="text" class="form-control" style="width:350px" placeholder="Insert here the JSONDoc URL" value="" autocomplete="off"> <!--${jsondoc.path}-->
 		        </div>
 		        <button id="getDocButton" class="btn btn-default">Get documentation</button>
 		    </form>
@@ -1088,6 +1088,9 @@ table td {
 			}
 		});
 	}
+
+    $("#jsondocfetch").val("http://localhost:8080/jsondoc");
+    $("#getDocButton").click();
 </script>
 
 </body>
