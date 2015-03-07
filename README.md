@@ -55,5 +55,6 @@ Apesar de trabalhar diariamente com tecnologias como JSF, EJB, Glassfish, Jersey
 - É possível realizar as requisições aos recursos REST a partir da página citada no tópico anterior, mas você também pode utilizar o cliente REST que preferir
 - Primeiramente será necessário popular o banco dados, para isso, utilize o recurso /delivery com o método POST
 - Voce visualizar o banco de dados através de um cliente H2. Para isso baixe, extraia o .zip e execute o arquivo .jar que se encontra na pasta /h2/bin. Se preferir um cliente diferente, no link a seguir, na seção "Database Frontends / ToolsDatabase Frontends / Tools" estão listados diversos aplicativos suportados pela H2: http://h2database.com/html/links.html#tools
+- Após executar o .jar, será aberta uma página no browser. Lembre-se de modificar o campo JDBC URL. Se estiver no Linux, por exemplo, ficará: jdbc:h2:~/walmart-logistics
 - Após popular o banco, você poderá realizar pesquisas para encontrar as melhores rota através do recurso /delivery com o método GET
 - Dúvidas de como realizar interação com os serviços REST, basta seguir as orientações da documentação citada anteriormente.
