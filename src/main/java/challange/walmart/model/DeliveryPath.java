@@ -16,7 +16,7 @@ public class DeliveryPath {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@ApiObjectField(name = "id")
+	@ApiObjectField(name = "id", description = "Generated automatically by database", required = true)
 	@Column(nullable = false)
 	private String name;
 	@ManyToOne

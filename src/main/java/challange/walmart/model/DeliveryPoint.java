@@ -16,7 +16,7 @@ import java.util.List;
 public class DeliveryPoint implements Comparable<DeliveryPoint> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@ApiObjectField(name = "id")
+	@ApiObjectField(name = "id", description = "Generated automatically by database", required = true)
 	private Long id;
 	@Column(nullable = false)
 	@ApiObjectField(name = "name", description = "Represents the name of the point", required = true)
