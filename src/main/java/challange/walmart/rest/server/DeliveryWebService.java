@@ -22,9 +22,9 @@ import java.io.Serializable;
 
 
 @Api(
-	name="LogisticsMap API",
-	description="A WebService where you can create Logistics Maps and also" +
-	" find the best route between two points")
+	name="Logistics Map API",
+	description="This application allows you to create Logistics Maps and also to" +
+	" find the best route between two points of a Logistics Map")
 @RestController
 public class DeliveryWebService implements Serializable {
 
@@ -39,6 +39,7 @@ public class DeliveryWebService implements Serializable {
 		responsestatuscode = "200",
 		verb = ApiVerb.GET
 	)
+	@ApiResponseObject(clazz = DeliveryPath.class)
     @RequestMapping(
 			consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE },
 			headers = "Content-Type=application/json",
@@ -73,6 +74,7 @@ public class DeliveryWebService implements Serializable {
 		responsestatuscode = "200",
 		verb = ApiVerb.GET
 	)
+	@ApiResponseObject(clazz = BestRoutDTO.class)
 	@RequestMapping(
 		consumes = MediaType.ALL_VALUE,
 		headers = "Content-Type=application/json;charset=UTF-8",
