@@ -24,7 +24,7 @@ Um exemplo de entrada seria, origem A, destino D, autonomia 10, valor do litro 2
 
 --------------------------------------------------------------------------------------------------------------
 
-## Tencologias e ferramentas utilizadas:
+## Tecnologias e ferramentas utilizadas:
 - Java EE Web API 7
 - Spring Context
 - Spring Web
