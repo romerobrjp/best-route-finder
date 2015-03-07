@@ -1,6 +1,6 @@
-# Walmart Logistics Challange
+# Walmart Logistics Challange 
 
-.: entregando mercadorias
+## Entregando mercadorias
 
 O Walmart esta desenvolvendo um novo sistema de logistica e sua ajuda é muito importante neste momento. 
 Sua tarefa será desenvolver o novo sistema de entregas visando sempre o menor custo. 
@@ -10,7 +10,7 @@ Para popular sua base de dados o sistema precisa expor um Webservices que aceite
 O formato de malha logística é bastante simples, cada linha mostra uma rota: ponto de origem, ponto de destino e 
 distância entre os pontos em quilômetros.
 
-A B 10
+A B 10 
 B D 15
 A C 20
 C D 30
@@ -21,3 +21,20 @@ Com os mapas carregados o requisitante irá procurar o menor valor de entrega e 
 ele passará o nome do ponto de origem, nome do ponto de destino, autonomia do caminhão (km/l) e o valor do litro 
 do combustivel, agora sua tarefa é criar este Webservices. Um exemplo de entrada seria, origem A, destino D, 
 autonomia 10, valor do litro 2,50; a resposta seria a rota A B D com custo de 6,25.
+
+--------------------------------------------------------------------------------------------------------------
+
+## Tencologias e ferramentas utilizadas:
+- Spring Web
+- Maven
+- JPA, Hibernate
+- Git com Github
+- JSONdoc
+- 
+
+## Como executar a aplicação:
+- Faça o checkout do respositótio Git através da url https://github.com/romeromfm/walmart-logistics.git
+- Vá até a pasta do projeto e execute o comando do plugin Jetty jetty:run
+- Acesse a url localhost:8080/jsondoc-ui.html para acessar a documentação da API REST
+- É possível realizar as requisições ao WebService a partir da página anterior citada, mas você também pode utilizar o cliente REST que preferir
+
