@@ -44,7 +44,7 @@ Apesar de trabalhar diariamente com tecnologias como JSF, EJB, Glassfish, Jersey
 
 ### Como executar a aplicação:
 - Faça o checkout do respositótio Git através da url https://github.com/romeromfm/walmart-logistics.git
-- Vá até a pasta do projeto e execute o comando do plugin Jetty jetty:run
+- Vá até a pasta do projeto e execute o comando do plugin Jetty para maven "mvn jetty:run"
 - Acesse a url localhost:8080/jsondoc-ui.html para acessar a documentação da API REST
 - É possível realizar as requisições aos recursos REST a partir da página citada no tópioc anterior, mas você também pode utilizar o cliente REST que preferir
 - Primeiramente será necessário popular o banco dados, para isso, utilize o recurso /delivery com o método POST
