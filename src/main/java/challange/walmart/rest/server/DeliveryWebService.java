@@ -49,13 +49,13 @@ public class DeliveryWebService implements Serializable {
 	@Transactional
     public DeliveryPath createLogisticsMap(
             @RequestParam(value = "map_name", required = true)
-			@ApiQueryParam(name="map_name", description="Name of the Map that will be created", required = true)
+			@ApiQueryParam(name="map_name", description="Name of the Map to be created", required = true)
 				String mapName,
             @RequestParam(value = "origin_point", required = true)
-			@ApiQueryParam(name="origin_point", description="Name of the origin point that will be registered in the LogisticsMap", required=true)
+			@ApiQueryParam(name="origin_point", description="Name of the origin point to be registered in the Logistics Map", required=true)
 				String originPointName,
             @RequestParam(value = "destiny_point", required = true)
-			@ApiQueryParam(name="destiny_point", description="Name of the destiny point that will be registered in the LogisticsMap", required=true)
+			@ApiQueryParam(name="destiny_point", description="Name of the destiny point to be registered in the Logistics Map", required=true)
 				String destinyPointName,
             @RequestParam(value = "distance", required = true)
 			@ApiQueryParam(name="distance", description="The distance, in kilometers, between the origin point and the destiny point", required=true)
@@ -83,16 +83,16 @@ public class DeliveryWebService implements Serializable {
 		value = "/delivery")
 	public BestRoutDTO getShortestRouteTo(
 		@RequestParam(value = "origin_point", required = true)
-		@ApiQueryParam(name="origin_point", description="Name of the OriginPoint", required = true)
+		@ApiQueryParam(name="origin_point", description="Name of the origin point", required = true)
 			String originPointName,
 		@RequestParam(value = "destiny_point", required = true)
-		@ApiQueryParam(name="destiny_point", description="Name of the destinyPoint", required = true)
+		@ApiQueryParam(name="destiny_point", description="Name of the destiny point", required = true)
 			String destinyPointName,
 		@RequestParam(value = "autonomy", required = true)
-		@ApiQueryParam(name="autonomy", description="Vehicle autonomy value (only numbers)", required = true)
+		@ApiQueryParam(name="autonomy", description="Vehicle autonomy value (numbers only)", required = true)
 			Double autonomy,
 		@RequestParam(value = "fuel_price", required = true)
-		@ApiQueryParam(name="map_name", description="Fuel price (only numbers separated by points", required = true)
+		@ApiQueryParam(name="map_name", description="Fuel price (numbers only, splitted by dots", required = true)
 			Double fuelPrice
 	) {
 		BestRoutDTO bestRout;
