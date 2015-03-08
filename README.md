@@ -38,18 +38,14 @@ Um exemplo de entrada seria, origem A, destino D, autonomia 10, valor do litro 2
 - JSONdoc
 - jQuery
 
-### Motivação
-Apesar de trabalhar diariamente com tecnologias como JSF, EJB, Glassfish, Jersey REST API, escolhi trabalhar com as utilizadas neste projeto devido à  simplicidade e "light weight" para construir e executar uma aplicação web. Apesar de nunca ter desenvolvido aplicações com Spring Web nem Jetty, esta escolha me permitiu nova aquisição de conhecimentos extremamente importantes onde as pessoas buscam cada vez menos reinventar a roda e utilizar-se de tecnologias cada vez mais inteligentes e simples ao mesmo tempo, refletindo assim na produtividade do desenvolvimento.
-
-
 ### Como executar a aplicação:
 - Antes de tudo é necessário que ter instalado e configurado as seguintes ferramentas: Git, Maven 3, JDK 7 ou superior.
 - Utilizando sua IDE favorita ou através de linha de comando, faça um clone do respositótio Git através da url https://github.com/romeromfm/walmart-logistics.git
 - Se necessário, modifique a versão do java que será usado na compilação através no parâmetro ${java-version} no pom.xml
 - [Opcional] Após baixar o projeto, dentro da pasta, execute "mvn compile" para compilar as classes e baixar as dependências necessárias
 - [Opcional] Para executar os testes execute "mvn test"
-- Por padrão a banco utilizado é o H2 (embarcado), portanto não é necessária nenheum configuração
-- [Opcional] Instale o PorstreSQL (se não tiver ainda) e crie uma banco chamado "walmart-logistics". Lembre-se de fazer as mudanças necessárias ao PostgreSQl no database.properties e também mudar o dialeto no arquivo hibernate-config.properties
+- Por padrão a banco utilizado é o H2 (embarcado), portanto não é necessária nenhuma configuração
+- [Opcional] Se por alguma motivo excepcional a aplicação não rodar com o H2, instale o PostgresSQL (se não tiver ainda) e crie uma banco chamado "walmart-logistics". Lembre-se de fazer as mudanças necessárias ao PostgreSQl no database.properties e também mudar o dialeto no arquivo hibernate-config.properties
 - Vamos agora iniciar o servidor de aplicações. Vá até a pasta do projeto e execute o comando do plugin Jetty para maven "mvn jetty:run" o qual irá baixar dependências necessárias, compilar o projeto e executar os testes, ou se preferir pela sua IDE. Não é necessário baixar o Jetty, o plugin do Maven se encarrega de tudo sozinho.
 - Com o servidor rodando, acesse a url localhost:8080 para acessar a documentação da API REST
 - É possível realizar as requisições aos recursos REST a partir da página citada no tópico anterior, mas você também pode utilizar o cliente REST que preferir
