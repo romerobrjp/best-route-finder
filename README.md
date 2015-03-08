@@ -53,9 +53,9 @@ Um exemplo de entrada seria, origem A, destino D, autonomia 10, valor do litro 2
 - Após popular o banco, você poderá realizar pesquisas para encontrar as melhores rota através do recurso /delivery com o método GET
 - Dúvidas de como realizar interação com os serviços REST, basta seguir as orientações da documentação citada anteriormente.
 
-### Extras
+## Extras
 
-# Utilizando o banco H2 no modo embedded
+### Utilizando o banco H2 no modo embedded
 - No database.properties comente as configurações PostgreSQL e descomente as relacionadas ao H2
 - Altere jdbc.username para "sa" e jdbc.password para vazio
 - No arquivo hibernate-config.properties modifique o dialeto para H2
