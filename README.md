@@ -34,24 +34,26 @@ Um exemplo de entrada seria, origem A, destino D, autonomia 10, valor do litro 2
 - JPA
 - Hibernate
 - PostgreSQL
+- H2
 - Git
 - JSONdoc
 - jQuery
+- IntelliJ IDEA
 
 ### Como executar a aplicação:
-- Antes de tudo é necessário que ter instalado e configurado as seguintes ferramentas: Git, Maven 3, JDK 7 ou superior.
-- Utilizando sua IDE favorita ou através de linha de comando, faça um clone do respositótio Git através da url https://github.com/romeromfm/walmart-logistics.git
-- Se necessário, modifique a versão do java que será usado na compilação através no parâmetro ${java-version} no pom.xml
+- Antes de tudo é necessário ter instalado e configurado as seguintes ferramentas: Git, Maven 3, JDK 7 ou superior.
+- Utilizando sua IDE favorita ou através de linha de comando, faça um clone do repositório Git através da url https://github.com/romeromfm/walmart-logistics.git
+- Se necessário, modifique a versão do Java que será usado na compilação através no parâmetro ${java-version} no pom.xml
 - [Opcional] Após baixar o projeto, dentro da pasta, execute "mvn compile" para compilar as classes e baixar as dependências necessárias
 - [Opcional] Para executar os testes execute "mvn test"
-- Por padrão a banco utilizado é o PostgreSQL (por ser robusto, grátis e rápido), porém se quiser utilizar um banco mais leve e embarcado é possível utilizar o H2, basta seguir as instruções na seção [Utilizando H2 Embedded]
-- Instale o PostgresSQL (se não tiver ainda) e crie uma banco chamado "walmart-logistics". Usuário e senha 'postgres', como definido no database.properties
-- Vamos agora iniciar o servidor de aplicações. Vá até a pasta do projeto e execute o comando do plugin Jetty para maven "mvn jetty:run" o qual irá baixar dependências necessárias, compilar o projeto e executar os testes, ou se preferir pela sua IDE. Não é necessário baixar o Jetty, pois o plugin do Maven se encarrega de tudo sozinho.
-- Com o servidor rodando, acesse a url localhost:8080 para acessar a documentação da API REST
+- Por padrão a banco utilizado é o PostgreSQL (por ser robusto, grátis e rápido), porém se quiser utilizar um banco mais leve e embarcado é possível utilizar o H2, basta seguir as instruções na seção [Utilizando o banco H2 no modo embedded]
+- Instale o PostgreSQL (se não tiver ainda) e crie uma banco chamado "walmart-logistics". Usuário e senha 'postgres', como definido no database.properties
+- Vamos agora iniciar o servidor de aplicações. Vá até a pasta do projeto e execute o comando do plugin Jetty para maven "mvn jetty:run" o qual irá baixar as dependências necessárias, compilar o projeto e executar os testes. Você pode fazer isso pela IDE também. Não é necessário baixar o Jetty, pois o plugin do Maven se encarrega de tudo sozinho.
+- Com o servidor rodando, abra o browser e nabegue para a url localhost:8080. Uma página com a documentação da API REST irá carregar.
 - É possível realizar as requisições aos recursos REST a partir da página citada no tópico anterior, mas você também pode utilizar o cliente REST que preferir
-- Primeiramente será necessário popular o banco dados, para isso, utilize o recurso /delivery com o método POST
+- Primeiramente, será necessário popular o banco de dados, para isso, utilize o recurso /delivery com o método POST e cadastre quantos Mapas (LogisticsMap) forem necessários.
 - Após popular o banco, você poderá realizar pesquisas para encontrar as melhores rotas através do recurso /delivery com o método GET
-- Dúvidas de como realizar interação com os serviços REST, basta seguir as orientações da documentação citada anteriormente.
+- Informações sobre os serviços REST podem ser encontradas na documentação citada anteriormente.
 
 ## Extras
 
