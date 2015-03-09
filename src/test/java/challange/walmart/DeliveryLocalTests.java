@@ -34,8 +34,8 @@ public class DeliveryLocalTests {
 	public void assertDeliveryPointsExistsAfterCreatingLogisticsMap() throws Exception {
 		final String POINT_A = "A";
 		final String POINT_B = "B";
-		final String MAP_NAME = "A-B";
-		final Double DISTANCE = 5.0;
+		final String MAP_NAME = "AB";
+		final Double DISTANCE = 10.0;
 
 		this.logisticsServiceMock.createLogisticsMap(
 			POINT_A, POINT_B, MAP_NAME, DISTANCE
@@ -99,13 +99,14 @@ public class DeliveryLocalTests {
         deliveryPath6.setDistance(30.0);
 
         DeliveryPoint originPoint = this.logisticsServiceMock.findDeliveryPointByName("A");
-        DeliveryPoint destinyPoint = this.logisticsServiceMock.findDeliveryPointByName("B");
+        DeliveryPoint destinyPoint = this.logisticsServiceMock.findDeliveryPointByName("D");
         Double autonomy = 10D;
-        Double fuelPrice = 3D;
+        Double fuelPrice = 2.5D;
 
         BestRoutDTO bestRoutDTO = this.logisticsServiceMock.calculateBestRoute(originPoint, destinyPoint, autonomy, fuelPrice);
 
         Assert.assertNotNull(bestRoutDTO);
+        Assert.assertEquals(bestRoutDTO.getCost(), new Double(6.25D));
         System.out.println(" >>> Best Route: " + bestRoutDTO);
     }
 }
