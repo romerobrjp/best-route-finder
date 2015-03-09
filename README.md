@@ -65,5 +65,5 @@ Apesar de trabalhar diariamente com tecnologias bem robustas (até demais) como 
 - No database.properties comente as configurações PostgreSQL e descomente as relacionadas ao H2
 - Altere jdbc.username para "sa" e jdbc.password para vazio
 - No arquivo hibernate-config.properties modifique o dialeto para H2
-- Você pode visualizar o banco de dados através de um cliente H2. Para isso baixe, extraia o .zip e execute o arquivo .jar que se encontra na pasta /h2/bin. Se preferir um cliente diferente, no link a seguir, na seção "Database Frontends / ToolsDatabase Frontends / Tools" estão listados diversos aplicativos suportados pela H2: http://h2database.com/html/links.html#tools
-- Após executar o .jar, será aberta uma página no browser. Basta apertar para conectar na url padrão mesmo que é a jdbc:h2:~/test
+- Você pode visualizar o banco de dados através de um cliente H2. Para isso baixe, extraia o .zip e execute o arquivo .jar que se encontra na pasta /h2/bin. Se preferir um cliente diferente, no link a seguir, na seção "Database Frontends / ToolsDatabase Frontends / Tools", estão listados diversos aplicativos suportados pela H2: http://h2database.com/html/links.html#tools
+- Após executar o .jar, será aberta uma página no browser. Basta conectar na url padrão, que é a jdbc:h2:~/test
