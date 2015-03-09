@@ -40,6 +40,10 @@ Um exemplo de entrada seria, origem A, destino D, autonomia 10, valor do litro 2
 - jQuery
 - IntelliJ IDEA
 
+### Motivação
+Apesar de trabalhar diariamente com tecnologias bem robustas (até demais) como JSF, EJB, Glassfish, Jersey REST API, escolhi trabalhar com as citadas no tópico anterior neste projeto devido à simplicidade e "lightweight" das mesmas. Portanto, mesmo sem nunca ter desenvolvido aplicações com Spring Web ou Jetty, esta experiência me permitiu experimentar o que de mais atual e fino há hoje no mundo/mercado de TI (nesse caso Java) para desenvolver aplicações Web limpas, leves e objetivas com bastante produtividade. Além disso, a aquisição e consolidação de novos conhecimentos foi totalmente válida e proveitosa.
+
+
 ### Como executar a aplicação:
 - Antes de tudo é necessário ter instalado e configurado as seguintes ferramentas: Git, Maven 3, JDK 7 ou superior.
 - Utilizando sua IDE favorita ou através de linha de comando, faça um clone do repositório Git através da url https://github.com/romeromfm/walmart-logistics.git
