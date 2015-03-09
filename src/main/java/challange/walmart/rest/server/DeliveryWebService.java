@@ -37,7 +37,7 @@ public class DeliveryWebService implements Serializable {
 		path = "/delivery",
 		produces = MediaType.APPLICATION_JSON_VALUE,
 		responsestatuscode = "200",
-		verb = ApiVerb.GET
+		verb = ApiVerb.POST
 	)
 	@ApiResponseObject(clazz = DeliveryPath.class)
     @RequestMapping(
