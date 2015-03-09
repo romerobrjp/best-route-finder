@@ -51,7 +51,7 @@ Apesar de trabalhar diariamente com tecnologias bem robustas (até demais) como 
 - [Opcional] Após baixar o projeto, dentro da pasta, execute "mvn compile" para compilar as classes e baixar as dependências necessárias
 - [Opcional] Para executar os testes execute "mvn test"
 - Por padrão a banco utilizado é o PostgreSQL (por ser robusto, grátis e rápido), porém se quiser utilizar um banco mais leve e embarcado é possível utilizar o H2, basta seguir as instruções na seção [Utilizando o banco H2 no modo embedded]
-- Instale o PostgreSQL (se não tiver ainda) e crie uma banco chamado "walmart-logistics". Usuário e senha 'postgres', como definido no database.properties
+- Instale o PostgreSQL (se não tiver ainda) e crie um banco chamado "walmart-logistics". Usuário e senha 'postgres', como definido no database.properties
 - Vamos agora iniciar o servidor de aplicações. Vá até a pasta do projeto e execute o comando do plugin Jetty para maven "mvn jetty:run" o qual irá baixar as dependências necessárias, compilar o projeto e executar os testes. Você pode fazer isso pela IDE também. Não é necessário baixar o Jetty, pois o plugin do Maven se encarrega de tudo sozinho.
 - Com o servidor rodando, abra o browser e nabegue para a url localhost:8080. Uma página com a documentação da API REST irá carregar.
 - É possível realizar as requisições aos recursos REST a partir da página citada no tópico anterior, mas você também pode utilizar o cliente REST que preferir
