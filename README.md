@@ -1,15 +1,11 @@
-# Walmart Logistics Challange 
+# Best Route Finder
 
-## Entregando mercadorias
+## Deliverying goods
 
-O Walmart esta desenvolvendo um novo sistema de logistica e sua ajuda é muito importante neste momento. 
-Sua tarefa será desenvolver o novo sistema de entregas *visando sempre o menor custo*. 
-Para popular sua base de dados o sistema precisa expor um *Webservices* que aceite o formato de malha logística 
-(exemplo abaixo), nesta mesma requisição *o requisitante deverá informar um nome para este mapa*. 
-*É importante que os mapas sejam persistidos* para evitar que a cada novo deploy todas as informações desapareçam. 
-O formato de malha logística é bastante simples, cada linha mostra uma rota: ponto de origem, ponto de destino e 
-distância entre os pontos em quilômetros.
+This application simulates a logistics system, and it aims to calculate the best route for a delivery between two points.
 
+The user is responsible for filling the logistics maps giving the following informations: origin point, destiny point, distance between two points in kilometers, and a name for the map.
+Examples:
 - A B 10 
 - B D 15
 - A C 20
@@ -17,14 +13,12 @@ distância entre os pontos em quilômetros.
 - B E 50
 - D E 30
 
-Com os mapas carregados o requisitante irá procurar o menor valor de entrega e seu caminho, para isso 
-ele passará o *nome do ponto de origem, nome do ponto de destino, autonomia do caminhão (km/l) e o valor do litro 
-do combustivel*, agora sua tarefa é criar este Webservices. 
-Um exemplo de entrada seria, origem A, destino D, autonomia 10, valor do litro 2,50; a resposta seria a rota A B D com custo de 6,25.
+To retrieve the best route, the user must inform some data: origin point, destiny point, vehicle autonomy, and fuel price per liter.
+For example: originPoint = "Point A",  destinyPoint = "Point D", vehicleAutonomy: 10, fuelPrice = 2.5. For this question, the best route, with the lower cost is: A -> B -> D, costing de 6.25.
 
 --------------------------------------------------------------------------------------------------------------
 
-## Tecnologias e ferramentas utilizadas:
+## Tools and technologies utilized in this project:
 - Java EE Web API 7
 - Spring Context
 - Spring Web
@@ -36,34 +30,33 @@ Um exemplo de entrada seria, origem A, destino D, autonomia 10, valor do litro 2
 - PostgreSQL
 - H2
 - Git
-- JSONdoc
+- JSONdoc (for REST API docummenting)
 - jQuery
 - IntelliJ IDEA
 
-### Motivação
-Apesar de trabalhar diariamente com tecnologias bem robustas (até demais) como JSF, EJB, Glassfish, Jersey REST API, escolhi trabalhar com as citadas no tópico anterior neste projeto devido à simplicidade e "lightweight" das mesmas. Portanto, mesmo sem nunca ter desenvolvido aplicações com Spring Web ou Jetty, esta experiência me permitiu experimentar o que de mais atual e fino há hoje no mundo/mercado de TI (nesse caso Java) para desenvolver aplicações Web limpas, leves e objetivas com bastante produtividade. Além disso, a aquisição e consolidação de novos conhecimentos foi totalmente válida e proveitosa.
+### Motivation
+Despite working with robusts technologies such as JSF, EJB, Glassfish and Jersey REST API, I chose to use the above mentioned technologies because they are more simpler and lighter, avoiding so much boilerplate code. Thus, even never had developed applications using Spring nor Jetty, this experiencie allowed me to try some good newer technologies that are warm in IT market. So, this way I can build more clean, lighter and objective Web applications.
 
 
-### Como executar a aplicação:
-- Antes de tudo é necessário ter instalado e configurado as seguintes ferramentas: Git, Maven 3, JDK 7 ou superior.
-- Utilizando sua IDE favorita ou através de linha de comando, faça um clone do repositório Git através da url https://github.com/romeromfm/walmart-logistics.git
-- Se necessário, modifique a versão do Java que será usado na compilação através no parâmetro ${java-version} no pom.xml
-- [Opcional] Após baixar o projeto, dentro da pasta, execute "mvn compile" para compilar as classes e baixar as dependências necessárias
-- [Opcional] Para executar os testes execute "mvn test"
-- Por padrão a banco utilizado é o PostgreSQL (por ser robusto, grátis e rápido), porém se quiser utilizar um banco mais leve e embarcado é possível utilizar o H2, basta seguir as instruções na seção [Utilizando o banco H2 no modo embedded]
-- Instale o PostgreSQL (se não tiver ainda) e crie um banco chamado "walmart-logistics". Usuário e senha 'postgres', como definido no database.properties
-- Vamos agora iniciar o servidor de aplicações. Vá até a pasta do projeto e execute o comando do plugin Jetty para maven "mvn jetty:run" o qual irá baixar as dependências necessárias, compilar o projeto e executar os testes. Você pode fazer isso pela IDE também. Não é necessário baixar o Jetty, pois o plugin do Maven se encarrega de tudo sozinho.
-- Com o servidor rodando, abra o browser e navegue para a url localhost:8080. Uma página com a documentação da API REST irá carregar.
-- É possível realizar as requisições aos recursos REST a partir da página citada no tópico anterior, mas você também pode utilizar o cliente REST que preferir
-- Primeiramente, será necessário popular o banco de dados, para isso, utilize o recurso /delivery com o método POST e cadastre quantos Mapas (LogisticsMap) forem necessários.
-- Após popular o banco, você poderá realizar pesquisas para encontrar as melhores rotas através do recurso /delivery com o método GET
-- Informações sobre os serviços REST podem ser encontradas na documentação citada anteriormente.
+### How to deploy and execute the application:
+- Pre-requisites: Git, Maven 3, JDK 7 or above.
+- With your favorite IDE or via terminal, clone my Git repository through "https://github.com/romeromfm/walmart-logistics.git"
+- If necessary, change the Java version in pom.xml through param value ${java-version}
+- [Optional] After clonning the project, on the download path directory, run "mvn compile" to compile all Java classes and download all necessary dependencies
+- [Optional] Run "mvn test" to execute the tests
+- PostgreSQL is the default database, however you can use a lighter db like H2. If want to use H2, just follow the instructions on section [Configuring H2 database in embedded mode]
+- Download and install PostgreSQL, create a new database named "route-finder". User and password are 'postgres', as defined in database.properties
+- To start the application server, go to the project folder and run "mvn jetty:run". It will download the necessary dependencies, compile the project and execute the tests. You can do it on your favorite IDE if you prefer. It is not necessary to download Jetty server, all you need is the Jetty Maven plugin
+- After server has started, open your browser and access "localhost:8080". The API REST documentation page will be loaded
+- You can do REST requests by this page or by a REST Client from your choice
+- First of all, you need to populate the database. For this, use the resource /delivery through the POST method to create some logistics maps
+- Now you can calculate the routes through the resource /delivery using the GET method
 
 ## Extras
 
-### Utilizando o banco H2 no modo embedded
-- No database.properties comente as configurações PostgreSQL e descomente as relacionadas ao H2
-- Altere jdbc.username para "sa" e jdbc.password para vazio
-- No arquivo hibernate-config.properties modifique o dialeto para H2
-- Você pode visualizar o banco de dados através de um cliente H2. Para isso baixe, extraia o .zip e execute o arquivo .jar que se encontra na pasta /h2/bin. Se preferir um cliente diferente, no link a seguir, na seção "Database Frontends / ToolsDatabase Frontends / Tools", estão listados diversos aplicativos suportados pela H2: http://h2database.com/html/links.html#tools
-- Após executar o .jar, será aberta uma página no browser. Basta conectar na url padrão, que é a jdbc:h2:~/test
+### Configuring H2 database in embedded mode
+- Open the configuration file "database.properties", comment PostgreSQL configuration and uncomment the H2 configs
+- Change "jdbc.username" to "sa" and "jdbc.password" to empty string
+- Open the configuration file "hibernate-config.properties" and change the dialect to H2
+- You can manage the database using a H2 client. Download the offical client on "http://h2database.com/html/links.html#tools". To connect, use the default values, that is "jdbc:h2~/test"
+- After downloading it, open the .jar. A window will be opened on your default browser, finally, connect on the default url "jdbc:h2:~/test"
