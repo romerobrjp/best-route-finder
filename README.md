@@ -4,7 +4,7 @@
 
 This application simulates a logistics system, and it aims to calculate the best route for a delivery between two points.
 
-The user is responsible for filling the logistics maps giving the following informations: origin point, destiny point, distance between two points in kilometers, and a name for the map.
+The user is responsible for filling the logistics maps giving the following information: origin point, destiny point, distance between two points in kilometers, and a name for the map.
 Examples:
 - A B 10 
 - B D 15
@@ -35,7 +35,7 @@ For example: originPoint = "Point A",  destinyPoint = "Point D", vehicleAutonomy
 - IntelliJ IDEA
 
 ### Motivation
-Despite working with robusts technologies such as JSF, EJB, Glassfish and Jersey REST API, I chose to use the above mentioned technologies because they are more simpler and lighter, avoiding so much boilerplate code. Thus, even never had developed applications using Spring nor Jetty, this experiencie allowed me to try some good newer technologies that are warm in IT market. So, this way I can build more clean, lighter and objective Web applications.
+Despite working with robusts technologies such as JSF, EJB, Glassfish and Jersey REST API, I chose to use the above mentioned technologies because they are simpler and lighter, avoiding so much boilerplate code. Thus, even never had developed applications using Spring nor Jetty, this experiencie allowed me to try some good newer technologies that are warm in IT market. So, this way I can build cleaner, lighter and objective Web applications.
 
 
 ### How to deploy and execute the application:
